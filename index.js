@@ -29,6 +29,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     - 'number-it-#{value}'
     - 'number-gts-#{value}'
     - 'number-its-#{value}'
+    - 'count-gts-#{value}'
+    - 'count-its-#{value}'
 */
 
 function validation(str, rules, cb) {
@@ -105,6 +107,20 @@ function verify(str, rule, err) {
     }
   }
 
+  if (/^count-gts-[0-9]+$/.test(rule)) {
+    var _value4 = +rule.match(/[0-9]+/)[0];
+    if (!CountGts(str, _value4)) {
+      obj = { isPass: false, msg: '' + (err || '字数不能少于' + _value4) };
+    }
+  }
+
+  if (/^count-its-[0-9]+$/.test(rule)) {
+    var _value5 = +rule.match(/[0-9]+/)[0];
+    if (!CountIts(str, _value5)) {
+      obj = { isPass: false, msg: '' + (err || '字数不能超过' + _value5) };
+    }
+  }
+
   return obj;
 }
 
@@ -148,6 +164,16 @@ function NumberGts(str, value) {
 function NumberIts(str, value) {
   if ((0, _isEmpty2.default)(str)) return true;
   return +str <= value;
+}
+
+function CountGts(str, value) {
+  if ((0, _isEmpty2.default)(str)) return true;
+  return str.toString().length >= value;
+}
+
+function CountIts(str, value) {
+  if ((0, _isEmpty2.default)(str)) return true;
+  return str.toString().length <= value;
 }
 
 exports.validation = validation;

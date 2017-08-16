@@ -12,6 +12,8 @@ import isEmpty from 'lodash/isEmpty';
     - 'number-it-#{value}'
     - 'number-gts-#{value}'
     - 'number-its-#{value}'
+    - 'count-gts-#{value}'
+    - 'count-its-#{value}'
 */
 
 function validation(str, rules, cb) {
@@ -89,6 +91,20 @@ function verify(str, rule, err) {
     }
   }
 
+  if (/^count-gts-[0-9]+$/.test(rule)) {
+    const value = +rule.match(/[0-9]+/)[0];
+    if (!CountGts(str, value)) {
+      obj = { isPass: false, msg: `${err || `字数不能少于${value}`}` };
+    }
+  }
+
+  if (/^count-its-[0-9]+$/.test(rule)) {
+    const value = +rule.match(/[0-9]+/)[0];
+    if (!CountIts(str, value)) {
+      obj = { isPass: false, msg: `${err || `字数不能超过${value}`}` };
+    }
+  }
+
   return obj;
 }
 
@@ -132,6 +148,16 @@ function NumberGts(str, value) {
 function NumberIts(str, value) {
   if (isEmpty(str)) return true;
   return +str <= value;
+}
+
+function CountGts(str, value) {
+  if (isEmpty(str)) return true;
+  return str.toString().length >= value;
+}
+
+function CountIts(str, value) {
+  if (isEmpty(str)) return true;
+  return str.toString().length <= value;
 }
 
 
