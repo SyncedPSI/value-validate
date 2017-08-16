@@ -9,11 +9,11 @@ import isEmpty from 'lodash/isEmpty';
     - 'phone'
     - 'number'
     - 'number-gt-#{value}'
-    - 'number-it-#{value}'
+    - 'number-lt-#{value}'
     - 'number-gts-#{value}'
-    - 'number-its-#{value}'
+    - 'number-lts-#{value}'
     - 'count-gts-#{value}'
-    - 'count-its-#{value}'
+    - 'count-lts-#{value}'
 */
 
 function validation(str, rules, cb) {
@@ -70,7 +70,7 @@ function verify(str, rule, err) {
     }
   }
 
-  if (/^number-it-[0-9]+$/.test(rule)) {
+  if (/^number-lt-[0-9]+$/.test(rule)) {
     const value = +rule.match(/[0-9]+/)[0];
     if (!NumberIt(str, value)) {
       obj = { isPass: false, msg: `${err || `请输入一个小于${value}的值`}` };
@@ -84,7 +84,7 @@ function verify(str, rule, err) {
     }
   }
 
-  if (/^number-its-[0-9]+$/.test(rule)) {
+  if (/^number-lts-[0-9]+$/.test(rule)) {
     const value = +rule.match(/[0-9]+/)[0];
     if (!NumberIts(str, value)) {
       obj = { isPass: false, msg: `${err || `请输入一个不超过${value}的值`}` };
@@ -98,7 +98,7 @@ function verify(str, rule, err) {
     }
   }
 
-  if (/^count-its-[0-9]+$/.test(rule)) {
+  if (/^count-lts-[0-9]+$/.test(rule)) {
     const value = +rule.match(/[0-9]+/)[0];
     if (!CountIts(str, value)) {
       obj = { isPass: false, msg: `${err || `字数不能超过${value}`}` };
