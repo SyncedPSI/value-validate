@@ -33,9 +33,11 @@ validation(
 + `phone`
 + `number`
 + `number-gt-#{number}`
-+ `number-it-#{number}`
++ `number-lt-#{number}`
 + `number-gts-#{number}`
-+ `number-its-#{number}`
++ `number-lts-#{number}`
++ `count-gts-#{value}`
++ `count-lts-#{value}`
 
 ####Callback
 
